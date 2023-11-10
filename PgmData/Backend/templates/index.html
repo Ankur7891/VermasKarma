@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title></title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link href="css/style.css" rel="stylesheet">
+    </head>
+    <body>
+        <button onClick="startGame()">Start</button>
+        <p id="counter"></p>
+
+        <p id="p1"></p>
+        <p id="p2"></p>
+        <script>
+        var counter = document.getElementById("counter");
+        var c = -1;
+        const startGame = () => {
+            c ++;
+            counter.innerHTML = c;
+        fetch('http://localhost:5001/dialoge/' + c)
+            .then(resp => resp.json())
+            .then(dialoge => {
+                var p1 = document.getElementById("p1");
+                var p2 = document.getElementById("p2");
+                p1.innerHTML = dialoge.p1;
+                p2.innerHTML = dialoge.p2;
+            })
+            .catch(err => console.log(err));
+        }
+        </script>
+    </body>
+</html>
